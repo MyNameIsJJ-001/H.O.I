@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+    H.O.I CRAVINGS – One‑Page Website Skeleton
+    Tech: Bootstrap 5 + AOS + Font Awesome
+    Notes: Look for COMMENT blocks like  >>> EDIT THIS <<< to customize
+  ========================================================== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Primary Meta Tags -->
+  <title>H.O.I Cravings – The Taste You Deserve!!!</title>
+  <meta name="title" content="H.O.I Cravings – The Taste You Deserve!!!" />
+  <meta name="description" content="Fresh sweet popcorn, creamy & spicy shawarma, tender smoky barbecue, snacks, chocolate & more. Event bookings and party preorders available in Malete, Kwara State." />
+  <meta name="keywords" content="H.O.I Cravings, Shawarma, Popcorn, Barbecue, Snacks, Malete, Kwara State, Naija flavor" />
+  <meta name="author" content="H.O.I Cravings" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" /> <!-- >>> EDIT THIS: replace with your final domain URL -->
+  <meta property="og:title" content="H.O.I Cravings – The Taste You Deserve!!!" />
+  <meta property="og:description" content="Shawarma • Popcorn • Barbecue • Snacks – Come hungry, leave satisfied." />
+  <meta property="og:image" content="image/flyer.webp" /> <!-- >>> EDIT THIS: add path to social share image (1200x630) -->
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://example.com/" /> <!-- >>> EDIT THIS -->
+  <meta property="twitter:title" content="H.O.I Cravings – The Taste You Deserve!!!" />
+  <meta property="twitter:description" content="Shawarma • Popcorn • Barbecue • Snacks – Come hungry, leave satisfied." />
+  <meta property="twitter:image" content="image/flyer.webp" /> <!-- >>> EDIT THIS -->
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo.webp" /> <!-- >>> EDIT THIS: add your favicon path -->
+
+  <!-- Preload hero background image so it appears instantly instead of popping in -->
+  <link rel="preload" as="image" href="images/fbig.webp" fetchpriority="high" />
+
+  <!-- Fonts: Bebas Neue for poster-style headlines, Work Sans for everything else -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Font Awesome (icons) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Custom Styles: "market ticket" identity built around H.O.I's street-food flavor -->
+  <style>
+    :root {
+      --ink: #1E140D;        /* warm near-black, base text & dark sections */
+      --paper: #FBF3E1;      /* warm menu-paper background */
+      --paper-white: #FFFFFF;
+      --red: #E8402A;        /* cravings red, primary CTA */
+      --red-deep: #B92E1C;   /* hover state */
+      --amber: #F2A73B;      /* mango accent */
+      --herb: #4C7A3E;       /* fresh-ingredient green */
+      --notch-sm: 8px;
+      --notch-lg: 18px;
+      --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+      --font-body: 'Work Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    body { scroll-behavior: smooth; background: var(--paper-white); color: var(--ink); font-family: var(--font-body); }
+    h1, h2, .tagline, .brand-word { font-family: var(--font-display); letter-spacing: .01em; }
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1; }
+    p, li { color: var(--ink); }
+    .text-muted { color: #6b5c4d !important; }
+
+    /* ---------- Buttons: signature cut-corner "ticket" shape everywhere ---------- */
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 600;
+      border-radius: 0 !important;
+      clip-path: polygon(var(--notch-sm) 0, 100% 0, 100% calc(100% - var(--notch-sm)), calc(100% - var(--notch-sm)) 100%, 0 100%, 0 var(--notch-sm));
+      transition: transform .15s ease, background-color .15s ease, color .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-brand { background: var(--red); color: #fff; border: none; }
+    .btn-brand:hover { background: var(--red-deep); color: #fff; }
+    .btn-outline-brand { border-color: var(--red); color: var(--red); }
+    .btn-outline-brand:hover { background: var(--red); color: #fff; }
+    .btn-success { background: #1e9e52; border-color: #1e9e52; }
+    .btn-success:hover { background: #167a3f; border-color: #167a3f; }
+
+    /* ---------- Navbar ---------- */
+    .navbar { border-bottom: 3px solid var(--ink); }
+    .navbar-brand img { height: 38px; }
+    .brand-word { font-size: 1.5rem; color: var(--red); letter-spacing: .02em; }
+    .nav-link { position: relative; font-weight: 500; color: var(--ink) !important; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: 2px; width: 0; height: 2px;
+      background: var(--red); transition: width .2s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(20,12,6,.55) 0%, rgba(20,12,6,.75) 55%, var(--ink) 100%),
+        linear-gradient(0deg, rgba(232,64,42,.35), rgba(232,64,42,.35)),
+        url('images/fbig.webp') center/cover no-repeat;
+      color: #fff;
+      padding: 130px 0 90px;
+    }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); text-shadow: 0 4px 24px rgba(0,0,0,.35); }
+    .stamp-badge {
+      display: inline-block; font-family: var(--font-body); font-weight: 700; font-size: .85rem;
+      letter-spacing: .08em; color: var(--ink); background: var(--amber);
+      padding: 8px 18px; transform: rotate(-3deg);
+      border: 2px dashed rgba(30,20,13,.55);
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+    .hashtag-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .hashtag-chip {
+      font-size: .8rem; font-weight: 500; color: #fff; background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.3); padding: 5px 12px;
+      clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    }
+
+    /* ---------- Section rhythm ---------- */
+    .section-light { background: var(--paper); }
+    .section-dark { background: var(--ink); color: #fff; position: relative; }
+    .section-dark .text-muted { color: rgba(255,255,255,.65) !important; }
+    .section-dark h2 { color: #fff; }
+
+    .divider { height: 4px; width: 64px; background: var(--red); margin: 14px auto 24px; }
+    .text-start .divider, .text-lg-start .divider { margin-left: 0; }
+
+    /* ---------- Signature "ticket" card shape, reused across content cards ---------- */
+    .card-ticket, .menu-card {
+      background: var(--paper-white);
+      border-radius: 0 !important;
+      clip-path: polygon(var(--notch-lg) 0, 100% 0, 100% calc(100% - var(--notch-lg)), calc(100% - var(--notch-lg)) 100%, 0 100%, 0 var(--notch-lg));
+      filter: drop-shadow(0 10px 22px rgba(30,20,13,.14));
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .card-ticket:hover, .menu-card:hover { transform: translateY(-4px); filter: drop-shadow(0 16px 28px rgba(30,20,13,.2)); }
+    .menu-card { border-top: 5px solid var(--amber); }
+    .menu-card img { height: 180px; object-fit: cover; transition: transform .3s ease; }
+    .menu-card:hover img { transform: scale(1.05); }
+
+    /* ---------- Feature icons ---------- */
+    .feature-icon-wrap {
+      width: 52px; height: 52px; min-width: 52px; border-radius: 50%;
+      background: var(--red); color: #fff; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* ---------- Owner / About ---------- */
+    .owner-photo-wrap { position: relative; display: inline-block; flex-shrink: 0; }
+    .owner-photo-wrap::before {
+      content: ''; position: absolute; inset: -8px; border: 2px dashed var(--amber); border-radius: 50%;
+    }
+    .owner-photo { width: 220px; height: 220px; object-fit: cover; border-radius: 100%; border: 5px solid #fff; box-shadow: 0 10px 30px rgba(30,20,13,.18); position: relative; }
+    .whatsapp-color { color: #1e9e52; }
+    .text-success { color: var(--herb) !important; }
+
+    /* ---------- Ticket edges: torn-paper transitions around the Events section ---------- */
+    .ticket-edge { position: absolute; left: 0; width: 100%; height: 22px; line-height: 0; overflow: hidden; }
+    .ticket-edge-top { top: 0; transform: translateY(-99%); }
+    .ticket-edge-bottom { bottom: 0; transform: translateY(99%) rotate(180deg); }
+    .ticket-edge svg { width: 100%; height: 100%; display: block; }
+
+    /* ---------- Floating CTA Buttons ---------- */
+    .floating-ctas { position: fixed; right: 16px; bottom: 16px; z-index: 1030; display: flex; flex-direction: column; gap: 10px; }
+    .floating-ctas a { width: 52px; height: 52px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.25); text-decoration: none; }
+    .cta-wa { background: #1e9e52; color: #fff; }
+    .cta-call { background: var(--red); color: #fff; }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--ink); color: rgba(255,255,255,.75); }
+    .site-footer a { color: #fff; }
+
+    /* ---------- Mobile fixes ---------- */
+    @media (max-width: 576px) {
+      .hero { padding: 90px 0 60px; }
+      .owner-photo { width: 130px; height: 130px; border-width: 4px; }
+      .owner-photo-wrap::before { inset: -6px; }
+    }
+
+    /* ---------- Quieter, shorter-travel AOS animations (overrides library defaults) ---------- */
+    [data-aos] { transition-property: opacity, transform !important; }
+    [data-aos="fade-up"] { transform: translate3d(0, 16px, 0) !important; }
+    [data-aos="fade-down"] { transform: translate3d(0, -16px, 0) !important; }
+    [data-aos="fade-left"] { transform: translate3d(16px, 0, 0) !important; }
+    [data-aos="fade-right"] { transform: translate3d(-16px, 0, 0) !important; }
+    [data-aos].aos-animate { transform: translate3d(0, 0, 0) !important; }
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      [data-aos] { transition: none !important; transform: none !important; }
+      .btn:hover, .card-ticket:hover, .menu-card:hover { transform: none !important; }
+    }
+  </style>
+
+  <!-- Local Business Schema (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "H.O.I Cravings",
+    "image": "https://example.com/assets/og-hero.jpg",
+    "description": "Shawarma, popcorn, barbecue & snacks in Malete, Kwara State.",
+    "telephone": "+2348144522430",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ayoka Filling Station Junction, Shop 1 Beside Transformer, Westend Malete",
+      "addressLocality": "Malete",
+      "addressRegion": "Kwara State",
+      "addressCountry": "NG"
+    },
+    "openingHours": [
+      "Mo-Su 16:00-23:00"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- ========================= NAVBAR ========================= -->
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#home">
+        <img src="images/logo.webp" alt="H.O.I Cravings Logo"> <!-- >>> EDIT THIS logo path -->
+        <span class="ms-2 brand-word">H.O.I Cravings</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-none d-lg-flex ms-3 gap-2">
+          <a href="https://wa.me/2348144522430" class="btn btn-success"><i class="fa-brands fa-whatsapp me-1"></i>WhatsApp</a> <!-- >>> EDIT NUMBERS (Nigeria format without leading 0) -->
+          <a href="tel:+2348144522430" class="btn btn-outline-brand"><i class="fa-solid fa-phone me-1"></i>Call</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================= HERO ========================= -->
+  <header id="home" class="hero text-center">
+    <div class="container">
+      <span class="stamp-badge" data-aos="fade">Now Open</span>
+      <h1 class="mt-3 tagline" data-aos="fade-up" data-aos-delay="100">The Taste You Deserve!!!</h1>
+      <p class="lead mt-3" data-aos="fade-up" data-aos-delay="200">Fresh sweet popcorn • Creamy & spicy shawarma • Tender, smoky barbecue • Snacks & Chocolate</p>
+      <div class="d-flex justify-content-center flex-wrap gap-2 mt-4" data-aos="fade-up" data-aos-delay="300">
+        <a href="#menu" class="btn btn-brand btn-lg"><i class="fa-solid fa-burger me-2"></i>Explore Menu</a>
+        <a href="https://wa.me/2348144522430?text=Hi%20H.O.I%20Cravings!%20I%20want%20to%20order." class="btn btn-outline-light btn-lg"><i class="fa-brands fa-whatsapp me-2"></i>Order on WhatsApp</a>
+      </div>
+
+      <!-- Hashtags from flyer -->
+      <div class="hashtag-row mt-4">
+        <span class="hashtag-chip">#HOICravings</span>
+        <span class="hashtag-chip">#ShawarmaSpot</span>
+        <span class="hashtag-chip">#PopcornLove</span>
+        <span class="hashtag-chip">#EventFoodMagic</span>
+        <span class="hashtag-chip">#NaijaFlavor</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= FEATURES / HOURS ========================= -->
+  <section class="py-5 section-light">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-7" data-aos="fade-right">
+          <div class="row g-4">
+            <div class="col-6">
+              <div class="d-flex align-items-start">
+                <span class="feature-icon-wrap me-3"><i class="fa-solid fa-popcorn"></i></span>
+                <div>
+                  <h6 class="mb-1">Fresh Sweet Popcorn</h6>
+                  <p class="mb-0 text-muted small">Popped daily for maximum crunch.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start">
+                <span class="feature-icon-wrap me-3"><i class="fa-solid fa-burrito"></i></span>
+                <div>
+                  <h6 class="mb-1">Creamy & Spicy Shawarma</h6>
+                  <p class="mb-0 text-muted small">Signature sauces, juicy fillings.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start">
+                <span class="feature-icon-wrap me-3"><i class="fa-solid fa-drumstick-bite"></i></span>
+                <div>
+                  <h6 class="mb-1">Tender, Smoky Barbecue</h6>
+                  <p class="mb-0 text-muted small">Slow-grilled goodness.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start">
+                <span class="feature-icon-wrap me-3"><i class="fa-solid fa-cookie-bite"></i></span>
+                <div>
+                  <h6 class="mb-1">Snacks, Chocolate & Others</h6>
+                  <p class="mb-0 text-muted small">Satisfy all your cravings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5" data-aos="fade-left">
+          <div class="p-4 card-ticket h-100">
+            <h5 class="fw-bold mb-2"><i class="fa-regular fa-clock me-2"></i>Opening Hours</h5>
+            <ul class="list-unstyled small mb-3">
+              <li class="mb-1">Weekdays: <strong>4:00 PM – 11:00 PM</strong></li>
+              <li>Weekends: <strong>4:00 PM – 11:30 PM</strong></li>
+            </ul>
+            <h6 class="fw-semibold mb-2"><i class="fa-solid fa-location-dot me-2"></i>Find Us</h6>
+            <p class="small mb-3">Ayoka Filling Station Junction, Shop 1 Beside Transformer, Westend Malete, Kwara State.</p>
+            <a href="#contact" class="btn btn-brand w-100">Get Directions & Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= MENU ========================= -->
+  <section id="menu" class="py-5">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="fw-bold">Our Menu</h2>
+        <div class="divider"></div>
+        <p class="text-muted">Tap a category to order quickly on WhatsApp.</p>
+      </div>
+      <div class="row g-4 mt-1">
+        <!-- Menu Card -->
+        <div class="col-md-3 col-6" data-aos="fade-up">
+          <div class="card border-0 menu-card h-100">
+            <img src="images/popcorn.webp" class="card-img-top" alt="Fresh Popcorn" loading="lazy"> <!-- >>> EDIT image -->
+            <div class="card-body">
+              <h6 class="card-title mb-1">Fresh Sweet Popcorn</h6>
+              <p class="card-text small text-muted">Crunchy, fragrant, irresistible.</p>
+              <a class="btn btn-outline-brand btn-sm" href="https://wa.me/2348144522430?text=I'd%20like%20to%20order%20Popcorn">Order</a>
+            </div>
+          </div>
+        </div>
+        <!-- Menu Card -->
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="card border-0 menu-card h-100">
+            <img src="images/shawarma.webp" class="card-img-top" alt="Shawarma" loading="lazy">
+            <div class="card-body">
+              <h6 class="card-title mb-1">Creamy & Spicy Shawarma</h6>
+              <p class="card-text small text-muted">Naija-style perfection.</p>
+              <a class="btn btn-outline-brand btn-sm" href="https://wa.me/2348144522430?text=I'd%20like%20to%20order%20Shawarma">Order</a>
+            </div>
+          </div>
+        </div>
+        <!-- Menu Card -->
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card border-0 menu-card h-100">
+            <img src="images/catfish1.webp" class="card-img-top" alt="Barbecue" loading="lazy">
+            <div class="card-body">
+              <h6 class="card-title mb-1">Tender, Smoky Barbecue</h6>
+              <p class="card-text small text-muted">Char-grilled and juicy.</p>
+              <a class="btn btn-outline-brand btn-sm" href="https://wa.me/2348144522430?text=I'd%20like%20to%20order%20Barbecue">Order</a>
+            </div>
+          </div>
+        </div>
+        <!-- Menu Card -->
+        <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card border-0 menu-card h-100">
+            <img src="images/chinchin.webp" class="card-img-top" alt="Snacks" loading="lazy">
+            <div class="card-body">
+              <h6 class="card-title mb-1">Snacks, Chocolate & Others</h6>
+              <p class="card-text small text-muted">A little treat for everyone.</p>
+              <a class="btn btn-outline-brand btn-sm" href="https://wa.me/2348144522430?text=I'd%20like%20to%20order%20Snacks">Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= EVENTS / CATERING ========================= -->
+  <section id="events" class="py-5 section-dark">
+    <div class="ticket-edge ticket-edge-top" aria-hidden="true">
+      <svg viewBox="0 0 100 10" preserveAspectRatio="none"><polygon points="0,10 2.5,0 5,10 7.5,0 10,10 12.5,0 15,10 17.5,0 20,10 22.5,0 25,10 27.5,0 30,10 32.5,0 35,10 37.5,0 40,10 42.5,0 45,10 47.5,0 50,10 52.5,0 55,10 57.5,0 60,10 62.5,0 65,10 67.5,0 70,10 72.5,0 75,10 77.5,0 80,10 82.5,0 85,10 87.5,0 90,10 92.5,0 95,10 97.5,0 100,10" style="fill:var(--ink)"/></svg>
+    </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="stamp-badge mb-3">Reserve Your Date</span>
+          <h2 class="mt-3">Event Bookings & Party Preorders</h2>
+          <div class="divider"></div>
+          <p class="text-muted">From small gatherings to big celebrations, we bring the <em>Event Food Magic</em> to you. Reserve your date and let us handle the cravings.</p>
+          <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+            <a href="https://wa.me/2348144522430?text=I'd%20like%20to%20book%20an%20event%20with%20H.O.I%20Cravings" class="btn btn-brand"><i class="fa-brands fa-whatsapp me-2"></i>Book on WhatsApp</a>
+            <a href="#contact" class="btn btn-outline-light"><i class="fa-solid fa-phone me-2"></i>Call Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticket-edge ticket-edge-bottom" aria-hidden="true">
+      <svg viewBox="0 0 100 10" preserveAspectRatio="none"><polygon points="0,10 2.5,0 5,10 7.5,0 10,10 12.5,0 15,10 17.5,0 20,10 22.5,0 25,10 27.5,0 30,10 32.5,0 35,10 37.5,0 40,10 42.5,0 45,10 47.5,0 50,10 52.5,0 55,10 57.5,0 60,10 62.5,0 65,10 67.5,0 70,10 72.5,0 75,10 77.5,0 80,10 82.5,0 85,10 87.5,0 90,10 92.5,0 95,10 97.5,0 100,10" style="fill:var(--ink)"/></svg>
+    </div>
+  </section>
+
+  <!-- ========================= ABOUT + OWNER ========================= -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="fw-bold">About Us</h2>
+        <div class="divider"></div>
+        <p class="text-muted">Passionate about flavor, freshness and fast service in the heart of Malete.</p>
+      </div>
+
+      <div class="row align-items-center g-4 mt-2">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h4 class="fw-bold">H.O.I Cravings</h4>
+          <p>We serve crowd‑favorites inspired by Nigerian street food culture—<strong>creamy & spicy shawarma</strong>, <strong>fresh popcorn</strong>, <strong>smoky barbecue</strong> and a rotating selection of <strong>snacks & chocolate</strong>. Whether you're grabbing a quick bite or planning a party, we’ve got you covered.</p>
+          <ul class="list-unstyled small text-muted">
+            <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i>Fast, friendly service</li>
+            <li class="mb-1"><i class="fa-solid fa-check text-success me-2"></i>Quality ingredients, bold flavors</li>
+            <li><i class="fa-solid fa-check text-success me-2"></i>Event catering & preorders available</li>
+          </ul>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card-ticket p-4 d-flex flex-column flex-sm-row align-items-center text-center text-sm-start gap-4">
+            <span class="owner-photo-wrap">
+              <img src="images/owner_pic.webp" class="owner-photo" alt="Owner/CEO Photo"> <!-- >>> EDIT THIS: upload CEO photo -->
+            </span>
+            <div>
+              <h5 class="fw-bold mb-1">[Owner/CEO Name]</h5> <!-- >>> EDIT THIS: CEO name -->
+              <p class="mb-2 text-muted small">Founder & CEO</p>
+              <p class="mb-0">"Food is our love language. At H.O.I Cravings, we promise you’ll <em>come hungry</em> and <strong>leave satisfied</strong>." <!-- >>> EDIT THIS: short personal/mission note --></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= GALLERY ========================= -->
+  <section id="gallery" class="py-5 section-light">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="fw-bold">Gallery</h2>
+        <div class="divider"></div>
+        <p class="text-muted">A peek at the goodness.</p>
+      </div>
+      <div class="row g-3 mt-1">
+        <!-- >>> EDIT: Replace with real images, repeat/extend cards as needed -->
+        <div class="col-6 col-md-3" data-aos="fade-up"><img src="images/lap.webp" class="img-fluid rounded-3" alt="Gallery 1" loading="lazy"></div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="50"><img src="images/catfish.webp" class="img-fluid rounded-3" alt="Gallery 2" loading="lazy"></div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100"><img src="images/chinchin.webp" class="img-fluid rounded-3" alt="Gallery 3" loading="lazy"></div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100"><img src="images/meatpie.webp" class="img-fluid rounded-3" alt="Gallery 4" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= CONTACT ========================= -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="fw-bold">Contact Us</h2>
+        <div class="divider"></div>
+        <p class="text-muted">Reach us on WhatsApp, phone or email. We reply fast during opening hours.</p>
+      </div>
+
+      <div class="row g-4 mt-2">
+        <!-- Contact Cards -->
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="card border-0 card-ticket h-100">
+            <div class="card-body">
+              <h5 class="fw-bold mb-2"><i class="fa-brands fa-whatsapp whatsapp-color me-2"></i>WhatsApp</h5>
+              <p class="small text-muted mb-2">Chat with us instantly for orders & enquiries.</p>
+              <a class="btn btn-success w-100" href="https://wa.me/2348144522430" target="_blank">Message on WhatsApp</a> <!-- >>> EDIT NUMBER -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card border-0 card-ticket h-100">
+            <div class="card-body">
+              <h5 class="fw-bold mb-2"><i class="fa-solid fa-phone me-2"></i>Call</h5>
+              <p class="small text-muted mb-2">We’re happy to take your order by phone.</p>
+              <a class="btn btn-outline-brand w-100" href="tel:+2348144522430">Call +234 814 452 2430</a> <!-- >>> EDIT NUMBER; you can add second number too -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map & Form -->
+      <div class="row g-4 align-items-stretch mt-1">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="ratio ratio-4x3 rounded-4 overflow-hidden shadow-sm">
+            <!-- >>> EDIT: Replace with your precise Google Maps iframe (share > embed map) -->
+            <iframe src="https://www.google.com/maps?q=Malete%2C%20Kwara%20State&output=embed" loading="lazy" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card-ticket p-4 h-100">
+            <h5 class="fw-bold mb-2">Quick Message</h5>
+            <p class="small text-muted mb-3">This form redirects to WhatsApp with your message prefilled.</p>
+            <form id="contactForm" class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Your name" required>
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message</label>
+                  <textarea class="form-control" id="message" rows="4" placeholder="What would you like to order or ask?" required></textarea>
+                  <div class="invalid-feedback">Please write a message.</div>
+                </div>
+                <div class="col-12 d-grid">
+                  <button class="btn btn-brand btn-lg" type="submit"><i class="fa-brands fa-whatsapp me-2"></i>Send on WhatsApp</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="py-4 site-footer">
+    <div class="container">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6 small">
+          <div><strong>Address:</strong> Ayoka Filling Station Junction, Shop 1 Beside Transformer, Westend Malete, Kwara State.</div>
+          <div><strong>Hours:</strong> Weekdays 4PM–11PM • Weekends 4PM–11:30PM</div>
+        </div>
+        <div class="col-md-6 text-md-end small">
+          <a href="#home" class="text-decoration-none me-3">Home</a>
+          <a href="#menu" class="text-decoration-none me-3">Menu</a>
+          <a href="#about" class="text-decoration-none me-3">About</a>
+          <a href="#contact" class="text-decoration-none">Contact</a>
+          <div class="mt-2">© <span id="year"></span> H.O.I Cravings. All rights reserved.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================= FLOATING CTAS ========================= -->
+  <div class="floating-ctas">
+    <a class="cta-wa" href="https://wa.me/2348144522430" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a> <!-- >>> EDIT NUMBER(s) -->
+    <a class="cta-call" href="tel:+2348144522430" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+  </div>
+
+  <!-- ========================= SCRIPTS ========================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Init AOS - kept subtle and smooth (short duration, gentle easing, small travel distance)
+    AOS.init({
+      once: true,
+      duration: 450,
+      easing: 'ease-out-sine',
+      offset: 60,
+      anchorPlacement: 'top-bottom'
+    });
+
+    // Dynamic year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form handler: redirects to WhatsApp with the message prefilled
+    (function() {
+      const form = document.getElementById('contactForm');
+      const phoneWhatsApp = '2348144522430'; // >>> EDIT THIS: main WhatsApp number without leading 0 (Nigeria = 234)
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        const name = document.getElementById('name').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        const composed = `Hello H.O.I Cravings,%0A%0AName: ${encodeURIComponent(name)}%0AMessage: ${encodeURIComponent(message)}%0A%0ASent from website.`;
+
+        const waURL = `https://wa.me/${phoneWhatsApp}?text=${composed}`;
+        window.open(waURL, '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>
